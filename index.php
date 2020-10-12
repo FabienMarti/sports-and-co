@@ -1,3 +1,12 @@
+<?php 
+    session_start();
+    include_once 'models/database.php';
+    include_once 'models/userMdl.php';
+    include_once 'models/foodMdl.php';
+    include_once 'controllers/indexCtrl.php';
+    //Include le controlleur lié au contenu chargé
+    isset($content) ? (include 'controllers/' . $content . 'Ctrl.php') : '' ;
+?>
 <!DOCTYPE html>
 <html lang="FR">
    <head>
