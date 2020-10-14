@@ -61,9 +61,6 @@ if(isset($_POST['sendRegistration'])){
         if(filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)){
             if($_POST['mailVerify'] == $_POST['mail']){
                 $user->mail = htmlspecialchars($_POST['mail']);
-                if(!mkdir('assets/img/users/' . $user->mail, 755)){
-                    $formErrors['mail'] = MAIL_ERROR_ALREADYUSED;
-                }
             }else{
                 $formErrors['mail'] = $formErrors['mailVerify'] = MAIL_ERROR_NOTEQUAL;
             }
@@ -126,14 +123,6 @@ if(isset($_POST['sendRegistration'])){
             $fileNewName = 'profilePicture' . '_' . $date;
             //On stocke dans une variable le chemin complet du fichier (chemin + nouveau nom + extension une fois uploadé) Attention : ne pas oublier le point
             $fileFullPath = $path . $fileNewName . '.' . $fileInfos['extension'];
-            //move_uploaded_files : déplace le fichier depuis son emplacement temporaire ($_FILES['file']['tmp_name']) vers son emplacement définitif ($fileFullPath)
-            if (move_uploaded_file($_FILES['profilePicture']['tmp_name'], $fileFullPath)) {
-                //On définit les droits du fichiers uploadé (Ici : écriture et lecture pour l'utilisateur apache, lecture uniquement pour le groupe et tout le monde)
-                chmod($fileFullPath, 0644);
-                $user->profilePicture = $fileFullPath;
-            } else {
-                $formErrors['profilePicture'] = PICTURE_ERROR;
-            }
         } else {
             $formErrors['profilePicture'] = PICTURE_ERROR_WRONG;
         }
@@ -156,10 +145,22 @@ if(isset($_POST['sendRegistration'])){
         }
         //Si c'est bon on ajoute l'utilisateur
         if($isOk){
+            //Créer un dossier avec le mail de l'utilisateur
+            mkdir('assets/img/users/' . $user->mail, 755);
+            //move_uploaded_files : déplace le fichier depuis son emplacement temporaire ($_FILES['file']['tmp_name']) vers son emplacement définitif ($fileFullPath)
+            if (move_uploaded_file($_FILES['profilePicture']['tmp_name'], $fileFullPath)) {
+                //On définit les droits du fichiers uploadé (Ici : écriture et lecture pour l'utilisateur apache, lecture uniquement pour le groupe et tout le monde)
+                chmod($fileFullPath, 0644);
+                $user->profilePicture = $fileFullPath;
+            }else{
+                $formErrors['profilePicture'] = PICTURE_ERROR;
+            }
             $user->addUser();
             $messageSuccess = 'Vous avez bien été enregistré';
         }else{
             $messageFail = 'Erreur lors de votre enregistrement';
         }
     }
+
+    var_dump($formErrors);
 }

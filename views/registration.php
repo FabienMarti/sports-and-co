@@ -1,3 +1,13 @@
+<?php if(isset($messageSuccess)){ ?>
+    <div class="alert alert-success" role="alert">
+        <?= $messageSuccess ?>
+    </div>
+<?php } ?>
+<?php if(isset($messageFail)){ ?>
+    <div class="alert alert-danger" role="alert">
+        <?= $messageFail ?>
+    </div>
+<?php } ?>
 <div id="registration" class="container p-5 my-3">
     <div class="row">
         <h1 class="col-12 text-center mb-5">Inscription <i class="fas fa-exclamation" style="color: #fe9c00"></i></h1>

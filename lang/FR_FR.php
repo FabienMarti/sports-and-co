@@ -1,7 +1,5 @@
 <?php
 
-
-
 //? Username
 define('USERNAME_ERROR_EMPTY', 'Le nom d\'utilisateur ne doit pas être vide.');
 define('USERNAME_ERROR_INVALID', 'Le nom d\'utilisateur doit comporter entre 2 et 30 caractères');
@@ -9,7 +7,7 @@ define('USERNAME_ERROR_ALREADYUSED', 'Le nom d\'utilisateur est déjà utilisé.
 
 //? Password
 define('PASSWORD_ERROR_EMPTY', 'Le mot de passe ne doit pas être vide.');
-define('PASSWORD_ERROR_WRONG', 'Le mot de passe doit comporter 1 majusucule, 1 minuscule, 1 chiffre et minimum 8 caractères.');
+define('PASSWORD_ERROR_WRONG', 'Le mot de passe doit comporter 1 majuscule, 1 minuscule, 1 chiffre et 8 caractères minimum.');
 define('PASSWORDVERIFY_ERROR_EMPTY', 'Le mot de passe (confirmation) ne doit pas être vide.');
 define('PASSWORD_ERROR_NOTEQUAL', 'Les mots de passe ne sont pas identiques');
 

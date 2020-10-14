@@ -40,26 +40,14 @@ class user
     }
   
     //! Verification si les nom d'utilisateur et mail sont disponibles
-    public function checkUserUnavailability(){
-       
-        $checkUserUnavailabilityByFieldName = $this->db->prepare(
-            'SELECT COUNT(`id`) AS `isUnavailable`
-            FROM ' . $this->table .
-            ' WHERE `username` = :username
-        '); 
-        $checkUserUnavailabilityByFieldName->bindValue(':username', $this->username, PDO::PARAM_STR);
-        $checkUserUnavailabilityByFieldName->execute();
-        return $checkUserUnavailabilityByFieldName->fetch(PDO::FETCH_OBJ)->isUnavailable;
-    }
-
     public function checkUserUnavailabilityByFieldName($field){
         $whereArray = [];
         foreach($field as $fieldName ){
             $whereArray[] = '`' . $fieldName . '` = :' . $fieldName;
         }
         $where = ' WHERE ' . implode(' AND ', $whereArray);
-        $checkUserUnavailabilityByFieldName = $this->db->prepare('
-            SELECT COUNT(`id`) as `isUnavailable`
+        $checkUserUnavailabilityByFieldName = $this->db->prepare(
+            'SELECT COUNT(`id`) as `isUnavailable`
             FROM ' . $this->table 
             . $where
         ); 
