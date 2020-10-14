@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    include_once 'lang/FR_FR.php';
     include_once 'models/database.php';
     include_once 'models/userMdl.php';
     include_once 'controllers/indexCtrl.php';

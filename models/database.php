@@ -11,7 +11,10 @@ class database {
     public function __construct() {
         
         try {
-            $this->db = new PDO('mysql:host=localhost;dbname=monprog;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));        } 
+            $this->db = new PDO('mysql:host=localhost;dbname=sportsandco;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            //BDD pour Mr Tanguy    
+            //$this->db = new PDO('mysql:host=localhost;dbname=sportsandco;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));        
+        } 
         catch (Exception $error) {
             die($error->getMessage());
         }

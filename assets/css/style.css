@@ -60,6 +60,21 @@ video {
     font-family: 'Noto Sans JP', sans-serif;
     font-size: 80px !important;
 }
+/*! REGISTRATION */
+.no-md-form input, .no-md-form select {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-radius: 0px;
+    color: #757575;
+    background-color: #e9ecef;
+}
+.no-md-form label {
+    color: #757575;
+}
+#registration .jumbotron{
+    background-color: #e9ecef;
+}
 /*! ------------------------------------------------------------------MEDIA QUERIES */
 /* media phone */
 @media screen and (max-width: 760px) { 
