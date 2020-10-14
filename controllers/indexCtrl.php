@@ -1,12 +1,8 @@
 <?php 
 
 $contentArray = array(
-    'Accueil' => 'home', 
-    'Calcul des calories' => 'calories-calc', 
-    'S\'inscrire' => 'register', 
-    'Connection' => 'connexion', 
-    'Ajout aliment' => 'add-food', 
-    'Produit' => 'food-individual'
+    'Accueil' => 'home',
+    'S\'inscrire' => 'registration'
 );
 
 if(isset($_GET['content']) && in_array($_GET['content'], $contentArray))  {

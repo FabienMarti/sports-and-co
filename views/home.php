@@ -23,7 +23,7 @@
                 </form>
                 <hr />
                 <div class="text-center mt-3">
-                    <a class="register-btn btn text-white" value="Connexion">Créer un compte</a>
+                    <a class="register-btn btn text-white" href="index.php?content=registration" >Créer un compte</a>
                 </div>
             </div>
         </div>

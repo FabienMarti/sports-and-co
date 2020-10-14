@@ -3,7 +3,10 @@
     margin: 0;
     font-family: 'Barlow', sans-serif;
 }
-.row, .container, .container-fluid {
+header{
+    height : 80px;
+}
+.row, .container-fluid {
     padding: 0;
     margin: 0;
 }
@@ -22,8 +25,7 @@
     background-color: #2e2e2e;
 }
 .header-picture {
-    background-image: url(../img/home/slogan-img.jpg) !important;
-    margin-top: 70px;
+    background-image: url('../img/home/slogan-img.jpg') !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
     min-height: 500px;
