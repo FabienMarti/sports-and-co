@@ -1,6 +1,13 @@
 <?php 
 
-$contentArray = array('Accueil' => 'home', 'Calcul des calories' => 'calories-calc', 'S\'inscrire' => 'register', 'Connection' => 'connexion', 'Ajout aliment' => 'add-food', 'Produit' => 'food-individual');
+$contentArray = array(
+    'Accueil' => 'home', 
+    'Calcul des calories' => 'calories-calc', 
+    'S\'inscrire' => 'register', 
+    'Connection' => 'connexion', 
+    'Ajout aliment' => 'add-food', 
+    'Produit' => 'food-individual'
+);
 
 if(isset($_GET['content']) && in_array($_GET['content'], $contentArray))  {
     foreach ($contentArray as $title => $value) {
@@ -9,6 +16,8 @@ if(isset($_GET['content']) && in_array($_GET['content'], $contentArray))  {
             $pageTitle = $title;
         }
     }
+}else{
+    $content = 'home';
 }
 
 //Gestion des actions

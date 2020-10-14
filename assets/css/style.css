@@ -1,0 +1,90 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Barlow', sans-serif;
+}
+.row, .container, .container-fluid {
+    padding: 0;
+    margin: 0;
+}
+/*! HOME */
+/*reveal effet*/
+.reveal {
+    opacity: 0;
+    transform: translateY(-100px);
+}
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: 3s;
+}
+.navbar {
+    background-color: #2e2e2e;
+}
+.header-picture {
+    background-image: url(../img/home/slogan-img.jpg) !important;
+    margin-top: 70px;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    min-height: 500px;
+}
+.header-slogan h1 {
+    margin-top: 100px;
+    color: #ffffff;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+.header-login .jumbotron {
+    box-shadow: 5px 5px 5px #777;
+    background-color: #e9ecef;
+}
+.header-login input, .register-btn {
+    border-radius: 25px;
+    font-size: 17px;
+}
+.register-btn {
+    background-color: #36a701;
+}
+#concept .card p {
+    font-size: 23px;
+}
+#concept .card-body {
+    height: 300px;
+}
+video {
+    background-size: cover;
+    width: 100%;
+}
+.video-card h1 {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 80px !important;
+}
+/*! ------------------------------------------------------------------MEDIA QUERIES */
+/* media phone */
+@media screen and (max-width: 760px) { 
+    .header-slogan h1 {
+        margin-top: 40px;
+        font-size: 20px;
+    }
+    #concept .card-body {
+        height: 300px !important;
+    }
+    .video-card h1 {
+        font-size: 20px !important;
+    }
+}
+/* media tablet & sm desktop */
+@media screen and (max-width: 1370px) {
+    .header-slogan h1 {
+        margin-top: 40px;
+        font-size: 40px;
+    }
+    #concept .card-body {
+        height: 400px;
+    }
+    #concept .card-body h2 {
+        font-size: 24px;
+    }
+    .video-card h1 {
+        font-size: 50px !important;
+    }
+}
