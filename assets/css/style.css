@@ -61,6 +61,11 @@ video {
     font-size: 80px !important;
 }
 /*! REGISTRATION */
+.errorForm {
+    color: rgb(150, 28, 28);
+    font-size: 14px;
+    margin-left: 10px;
+}
 .no-md-form input, .no-md-form select {
     border-top: none;
     border-right: none;
