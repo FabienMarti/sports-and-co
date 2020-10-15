@@ -91,6 +91,37 @@
                         <p class="errorForm"><?= isset($formErrors['profilePicture']) ? $formErrors['profilePicture'] : '' ?></p>
                     </div>
                 </div>
+                <div class="form-group">
+                    <h2>Ajoutez un sport pratiqué</h2>
+                    <select name="practicedSport">
+                        <option value="" selected disabled>Sélectionnez un sport</option>
+                        <?php
+                            $variable = array ('Footing', 'Muscu');
+                            foreach ($variable as $key => $value) { ?>
+                                <option value="<?= $key ?>"><?= $value ?></option>
+                        <?php } ?>
+                    </select>
+                    <!-- CTRL => Si vide, ajouter'Aucun' dans la BDD -->
+                    <label for="club">Nom du club</label>
+                    <input type="text" name="club" id="club" />
+                    <!-- Revoir nom du champ cp (bdd) -->
+                    <label for="clubCP">code postal du club</label>
+                    <input type="text" name="clubCP" id="clubCP" />
+                    <small>Si aucun club, ne rien remplir</small>
+                    <label for="level">Votre niveau dans ce sport</label>
+                    <div class="col-12">
+                        <label class="my-auto" for="beginner">Débutant : </label>
+                        <input type="radio" name="level" value="1" id="beginner" checked <?= isset($_POST['level']) && $_POST['level'] == '1' ? 'checked' : '' ?> class="my-auto <?= isset($formErrors['level']) ? 'is-invalid' : '' ?>" />
+                    </div>
+                    <div class="col-12">
+                        <label class="my-auto" for="intermediate">Intermédiaire : </label>
+                        <input type="radio" name="level" value="2" id="intermediate" <?= isset($_POST['level']) && $_POST['level'] == '2' ? 'checked' : '' ?> class="my-auto <?= isset($formErrors['level']) ? 'is-invalid' : '' ?>" />
+                    </div>
+                    <div class="col-12">
+                        <label class="my-auto" for="advanced">Avancé : </label>
+                        <input type="radio" name="level" value="3" id="advanced" <?= isset($_POST['level']) && $_POST['level'] == '3' ? 'checked' : '' ?> class="my-auto <?= isset($formErrors['level']) ? 'is-invalid' : '' ?>" />
+                    </div>
+                </div>
                 <div class="col-12">
                     <div class="text-center">
                         <input type="submit" name="sendRegistration" class="btn btn-primary" value="S'inscrire" />

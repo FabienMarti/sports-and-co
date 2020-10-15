@@ -20,7 +20,26 @@ class user
         $this->db = database::getInstance();
         $this->db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     }
+    
+    /******************** TRANSACTIONS : Methodes liées à l'instance PDO à n'utiliser que dans le permier modele ************************/
 
+    //Methode pour acceder à l'objet db qui est en privé (getter/setter)
+    public function beginTransaction(){
+        return $this->db->beginTransaction();
+    }
+
+    public function rollBack(){
+        return $this->db->rollBack();
+    }
+
+    public function lastInsertId(){
+        return $this->db->lastInsertId();
+    }
+
+    public function commit(){
+        return $this->db->commit();
+    }
+    
     //! Ajout utilisateur
     public function addUser(){
         $addUserQuery = $this->db->prepare(
