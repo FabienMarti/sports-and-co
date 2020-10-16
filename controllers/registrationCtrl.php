@@ -1,9 +1,24 @@
 <?php
+include 'models/sportsListMdl.php';
+include 'models/clubsMdl.php';
 
+$levelList = array('1' => 'Débutant', '2' => 'Intermédiaire', '3' => 'Avancé');
 $genderList = array('1' => 'Homme', '2' => 'Femme');
-$regexList = array('username' => '%^[A-ÿ0-9_\-]{2,30}$%', 'password' => '%^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$%', 'city' => '%^[A-z]{2,}$%', 'date' => '%^[0-9]{4}-[0-9]{2}-[0-9]{2}$%');
+$regexList = array(
+    'username' => '%^[A-ÿ0-9_\-]{2,30}$%', 
+    'password' => '%^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$%', 
+    'city' => '%^[A-z]{2,}$%', 
+    'date' => '%^[0-9]{4}-[0-9]{2}-[0-9]{2}$%',
+    'postalCode' => '%^[0-9]{5}$%'
+
+);
 $fileExtension = array('jpg', 'png', 'bmp', 'jpeg');
 $formErrors = array();
+
+$sports = new sports;
+$club = new clubs;
+
+$showAllSports = $sports->getAllSports();
 
 if(isset($_POST['sendRegistration'])){
 
@@ -130,6 +145,56 @@ if(isset($_POST['sendRegistration'])){
         $formErrors['profilePicture'] = PICTURE_ERROR_EMPTY;
     }
 
+
+//? Vérification du nom du club
+    if(!empty($_POST['club'])){
+        if(strlen($_POST['club']) >= 25){
+            $formErrors['club'] = CLUB_ERROR_LENGHT;
+        }else{
+            $club->name = htmlspecialchars($_POST['club']);
+        }
+    }else{
+        $formErrors['club'] = CLUB_ERROR_EMPTY;
+    }
+
+//? Vérification du CP du club
+    if(!empty($_POST['postalCode'])){
+        if(preg_match($regexList['postalCode'], $_POST['postalCode'])){
+            $club->postalCode = $_POST['postalCode'];
+        }else{
+            $formErrors['postalCode'] = PC_ERROR_WRONG;   
+        }
+    }else{
+        $formErrors['postalCode'] = PC_ERROR_EMPTY;
+    }
+
+//? Vérif du niveau de pratique
+    if(!empty($_POST['level'])){
+        if(array_key_exists($_POST['level'], $levelList)){
+            $user->level = $_POST['level'];
+        }else{
+            $formErrors['level'] = LEVEL_ERROR_WRONG;
+        }
+    }else{
+        $formErrors['level'] = LEVEL_ERROR_EMPTY;
+    }
+
+//? Vérif du sport séléctionné
+    if(!empty($_POST['sport'])){
+
+        $sports->sport_id = $_POST['sport'];
+        if(!$sports->checkSportExistsInList()){
+            $user->sportId = $_POST['sport'];
+        }else{
+            $formErrors['sport'] = 'Le sport sélectionné n\'existe pas.';
+        }
+    }else{
+        $formErrors['sport'] = 'Un sport doit être renseigné.';
+    }
+
+
+
+
 //? Si formErrors ne contient aucun message d'erreur
     if(empty($formErrors)){
         $isOk = true;
@@ -145,6 +210,22 @@ if(isset($_POST['sendRegistration'])){
         }
         //Si c'est bon on ajoute l'utilisateur
         if($isOk){
+            //! TRANSACTION
+            //try catch permet d'isoler une erreur éventuelle ...
+            try{
+                $user->beginTransaction();
+                //!methode d'ajout 1
+                //recupere le dernier ID utilisé pour l'inserer dans la seconde insertion
+                /* $objet2->id = */ $user->lastInsertId();
+                //!methode d'ajout 2
+                //commit pour valider les lignes précedentes
+                $user->commit();
+            }
+            //Exception : erreur systeme, demande d'avoir une action derrière
+            catch(Exception $e){
+                $user->rollBack();
+            }
+    
             //Créer un dossier avec le mail de l'utilisateur
             mkdir('assets/img/users/' . $user->mail, 755);
             //move_uploaded_files : déplace le fichier depuis son emplacement temporaire ($_FILES['file']['tmp_name']) vers son emplacement définitif ($fileFullPath)

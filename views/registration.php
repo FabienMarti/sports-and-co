@@ -25,7 +25,7 @@
                     <div class="form-group no-md-form">
                         <label for="gender">Genre</label>
                         <select class="form-control"  name="gender" id="gender">
-                            <option disabled selected>Selectionner un genre</option>
+                            <option disabled selected>Selectionnez un genre</option>
                             <?php 
                             foreach($genderList as $key => $value){ 
                                 ?><option value="<?= $key ?>"><?= $value ?></option><?php
@@ -93,35 +93,35 @@
                 </div>
                 <div class="form-group">
                     <h2>Ajoutez un sport pratiqué</h2>
-                    <select name="practicedSport">
+
+                    <!-- SPORT PRATIQUE -->
+                    <select name="sport">
                         <option value="" selected disabled>Sélectionnez un sport</option>
                         <?php
-                            $variable = array ('Footing', 'Muscu');
-                            foreach ($variable as $key => $value) { ?>
-                                <option value="<?= $key ?>"><?= $value ?></option>
+                            foreach ($showAllSports as $value) { ?>
+                                <option value="<?= $value->id ?>"><?= $value->name ?></option>
                         <?php } ?>
+                        <!-- A gerer plus tard -->
+                        <option value="999">Autres</option>
                     </select>
+
                     <!-- CTRL => Si vide, ajouter'Aucun' dans la BDD -->
                     <label for="club">Nom du club</label>
                     <input type="text" name="club" id="club" />
                     <!-- Revoir nom du champ cp (bdd) -->
-                    <label for="clubCP">code postal du club</label>
-                    <input type="text" name="clubCP" id="clubCP" />
+                    <label for="postalCode">code postal du club</label>
+                    <input type="text" name="postalCode" id="postalCode" />
                     <small>Si aucun club, ne rien remplir</small>
                     <label for="level">Votre niveau dans ce sport</label>
-                    <div class="col-12">
-                        <label class="my-auto" for="beginner">Débutant : </label>
-                        <input type="radio" name="level" value="1" id="beginner" checked <?= isset($_POST['level']) && $_POST['level'] == '1' ? 'checked' : '' ?> class="my-auto <?= isset($formErrors['level']) ? 'is-invalid' : '' ?>" />
-                    </div>
-                    <div class="col-12">
-                        <label class="my-auto" for="intermediate">Intermédiaire : </label>
-                        <input type="radio" name="level" value="2" id="intermediate" <?= isset($_POST['level']) && $_POST['level'] == '2' ? 'checked' : '' ?> class="my-auto <?= isset($formErrors['level']) ? 'is-invalid' : '' ?>" />
-                    </div>
-                    <div class="col-12">
-                        <label class="my-auto" for="advanced">Avancé : </label>
-                        <input type="radio" name="level" value="3" id="advanced" <?= isset($_POST['level']) && $_POST['level'] == '3' ? 'checked' : '' ?> class="my-auto <?= isset($formErrors['level']) ? 'is-invalid' : '' ?>" />
-                    </div>
+                    <?php
+                        foreach ($levelList as $key => $value) { ?>
+                            <div class="col-12">
+                                <label class="my-auto" for="<?= $value ?>"><?= $value ?> : </label>
+                                <input type="radio" name="level" value="<?= $key ?>" id="<?= $value ?>" <?= isset($_POST['level']) && $_POST['level'] == $key ? 'checked' : '' ?> class="my-auto <?= isset($formErrors['level']) ? 'is-invalid' : '' ?>" />
+                            </div>
+                    <?php } ?>
                 </div>
+
                 <div class="col-12">
                     <div class="text-center">
                         <input type="submit" name="sendRegistration" class="btn btn-primary" value="S'inscrire" />

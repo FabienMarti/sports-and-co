@@ -35,7 +35,15 @@ define('PICTURE_ERROR', 'Votre fichier ne s\'est pas téléversé correctement.'
 define('PICTURE_ERROR_WRONG', 'Votre fichier n\'est pas du format attendu.');
 define('PICTURE_ERROR_EMPTY', 'Veuillez selectionner un fichier.');
 
+//? Club
+define('CLUB_ERROR_LENGHT', 'La longueur du nom du club ne doit pas excéder 25 caractères.');
+define('CLUB_ERROR_EMPTY', 'Le nom du club ne doit pas être vide.');
+define('PC_ERROR_WRONG', 'Le code postal doit être du format : 61234.');
+define('PC_ERROR_EMPTY', 'Le code postal doit être renseigné.');
+
+//? Niveau de pratique
+define('LEVEL_ERROR_WRONG', 'Le niveau doit se trouver dans la liste.');
+define('LEVEL_ERROR_EMPTY', 'Un niveau de pratique doit être sélectionné.');
+
 //? Autres
-
-
 define('LOGIN_ERROR', 'Le mot de passe et/ou l\'adresse mail est incorrecte');
